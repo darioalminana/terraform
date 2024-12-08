@@ -18,12 +18,12 @@ locals {
 }
 
 resource "aws_instance" "wpt" {
-  for_each                    = var.service_names
-  ami                         = "ami-055e3d4f0bbeb5878"
-  instance_type               = "t2.micro"
-  subnet_id                   = module.vpc.public_subnets[0]
-  vpc_security_group_ids      = [module.terraform-sg.security_group_id]
-  associate_public_ip_address = true
+  for_each      = var.service_names
+  ami           = "ami-055e3d4f0bbeb5878"
+  instance_type = "t2.micro"
+  subnet_id              = module.vpc.public_subnets[0]
+  vpc_security_group_ids = [module.terraform-sg.security_group_id] 
+  associate_public_ip_address = true 
   tags = {
     Type = local.tag
     Name = "EC2-${each.key}"
